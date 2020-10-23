@@ -39,11 +39,14 @@ settings =
 			
 	apis:
 		web:
-			url: "http://#{process.env['WEB_API_HOST'] or process.env['WEB_HOST'] or "localhost"}:#{process.env['WEB_API_PORT'] or process.env['WEB_PORT'] or 3000}"
+		# zevin
+			url: process.env['WEB_URL'] or "http://#{process.env['WEB_API_HOST'] or process.env['WEB_HOST'] or "localhost"}:#{process.env['WEB_API_PORT'] or process.env['WEB_PORT'] or 3000}" # real-time.config.callee.1
+			# url: "http://#{process.env['WEB_API_HOST'] or process.env['WEB_HOST'] or "localhost"}:#{process.env['WEB_API_PORT'] or process.env['WEB_PORT'] or 3000}"
 			user: process.env['WEB_API_USER'] or "sharelatex"
 			pass: process.env['WEB_API_PASSWORD'] or "password"
 		documentupdater:
-			url: "http://#{process.env['DOCUMENT_UPDATER_HOST'] or process.env['DOCUPDATER_HOST'] or "localhost"}:3003"
+		# zevin
+			url : process.env['DOOCUMENT_UPDATER_URL'] or "http://#{process.env['DOCUPDATER_HOST'] or process.env['DOCUMENT_UPDATER_HOST'] or 'localhost'}:3003" # real-time.config.callee.1
 			
 	security:
 		sessionSecret: process.env['SESSION_SECRET'] or "secret-please-change"
