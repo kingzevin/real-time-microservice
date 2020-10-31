@@ -5,7 +5,7 @@
   process.env['WEB_HOST'] = '172.17.0.1'
   process.env['WEB_URL'] = 'http://172.17.0.1:10001/api/v1/web/guest/sharelatex/web'
   process.env['DOOCUMENT_UPDATER_URL'] = 'http://172.17.0.1:10001/api/v1/web/guest/sharelatex/document-updater'
-  process.env["SHAREALTEX_CONFIG"] = __dirname + '/settings.coffee';
+  process.env["SHARELATEX_CONFIG"] = __dirname + '/settings.coffee';
 
   var CookieParser, DocumentUpdaterController, DrainManager, HealthCheckManager, Metrics, RedisStore, Router, SessionSockets, Settings, WebsocketLoadBalancer, app, async, clusterClient, cookieParser, drainAndShutdown, express, healthCheck, host, io, logger, port, publishJob, pubsubClient, rclient, redis, runPubSubTraffic, server, session, sessionRedisClient, sessionSockets, sessionStore, shutdownCleanly, shutdownDrainTimeWindow, signal, _, _i, _len, _ref, _ref1, _ref2;
 
