@@ -99,6 +99,10 @@
               return;
             }
           }
+          // zevin: TR4
+          const NS_PER_SEC = 1e9;
+          const TR4 = process.hrtime();    
+          logger.log({TR4: TR4[0]*NS_PER_SEC+TR4[1], update: message.op.v}, 'Zevin: TR4')
           return DocumentUpdaterController._applyUpdateFromDocumentUpdater(io, message.doc_id, message.op);
         } else if (message.error != null) {
           return DocumentUpdaterController._processErrorFromDocumentUpdater(io, message.doc_id, message.error, message);
@@ -143,6 +147,10 @@
             version: update.v,
             source: (_ref1 = update.meta) != null ? _ref1.source : void 0
           }, "distributing update to sender");
+          // zevin: TR2
+          const NS_PER_SEC = 1e9;
+          const TR2 = process.hrtime();    
+          logger.log({TR2: TR2[0]*NS_PER_SEC+TR2[1], update_v: update.v}, 'Zevin: TR2')
           try {
             client.emit("otUpdateApplied", {
               v: update.v,

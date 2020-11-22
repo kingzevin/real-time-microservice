@@ -286,6 +286,10 @@
           if (callback == null) {
             callback = function(error) {};
           }
+          // zevin: TR1
+          const NS_PER_SEC = 1e9;
+          const TR1 = process.hrtime();
+          logger.log({TR1: TR1[0]*NS_PER_SEC+TR1[1], update_v: update.v}, 'Zevin: TR1')
           return WebsocketController.applyOtUpdate(client, doc_id, update, function(err) {
             if (err != null) {
               return Router._handleError(callback, err, client, "applyOtUpdate", {

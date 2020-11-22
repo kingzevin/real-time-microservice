@@ -131,18 +131,30 @@
         return callback(error);
       }
       doc_key = "" + project_id + ":" + doc_id;
+
       return rclient.rpush(Keys.pendingUpdates({
         doc_id: doc_id
       }), jsonChange, function(error) {
         if (error != null) {
           return callback(error);
         }
-        return rclient.rpush("pending-updates-list", doc_key, function(error) {
+        return rclient.rpush("pending-updates-list", doc_key, function(error) {          
+          // zevin: TR3
+          const NS_PER_SEC = 1e9;
+          const TR3 = process.hrtime();    
+          logger.log({TR3: TR3[0]*NS_PER_SEC+TR3[1], update_v: change.v}, 'Zevin: TR3')
           // zevin
           if (error == null) {
             const request = require('request'); // real-time.background.publisher
-            url = "" + settings.apis.documentupdater.url + '/RedisUpdated'
-            request.get(url)
+            url = "" + settings.apis.documentupdater.url + '/RedisUpdated' + '?v=' + change.v;
+            request.get(url, function(error, response, data){
+              if(error != null){
+                logger.log({response: response}, 'TD Error')
+              }
+              else{
+                logger.log(data, {update_v: change.v}, 'Zevin: TD')
+              }
+            })
           }
           return callback(error)
         });
